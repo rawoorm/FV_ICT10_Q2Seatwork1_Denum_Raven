@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ICT | Candidate Verification System</title>
+
+    <link rel="stylesheet"
+          href="https://pyscript.net/releases/2025.8.1/core.css">
+    <script type="module"
+            src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #080d1a;
+            color: #f1f5f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 32px;
+            background: #111a2e;
+            border: 1px solid #263650;
+            border-radius: 16px;
+        }
+
+        .logo {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            background: #0d2b3b;
+            color: #22d3ee;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #22d3ee;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            margin-bottom: 12px;
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .subtitle {
+            margin-bottom: 28px;
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dbeafe;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            outline: none;
+            background: #0b1222;
+            color: #f1f5f9;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input::placeholder {
+            color: #64748b;
+        }
+
+        input:focus {
+            border-color: #22d3ee;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 4px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #22d3ee;
+            color: #08202b;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #67e8f9;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 15px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            background: #0b1222;
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .result::before {
+            content: "VERIFICATION STATUS";
+            display: block;
+            margin-bottom: 6px;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .result.success {
+            border-color: #10b981;
+            background: #0b241f;
+            color: #6ee7b7;
+        }
+
+        .result.success::before {
+            content: "✓ ACCESS GRANTED";
+            color: #34d399;
+        }
+
+        .result.error {
+            border-color: #f87171;
+            background: #2a151d;
+            color: #fca5a5;
+        }
+
+        .result.error::before {
+            content: "✕ ACCESS DENIED";
+            color: #f87171;
+        }
+
+        .result.warning {
+            border-color: #fbbf24;
+            background: #292213;
+            color: #fde68a;
+        }
+
+        .result.warning::before {
+            content: "⚠ SYSTEM NOTICE";
+            color: #fbbf24;
+        }
+
+        .footer {
+            margin-top: 24px;
+            color: #64748b;
+            font-size: 10px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .footer span {
+            color: #22d3ee;
+            font-weight: 700;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="logo">ICT</div>
+
+        <div class="tag">MEMBERSHIP PORTAL</div>
+
+        <h1>Candidate Verification System</h1>
+
+        <p class="subtitle">
+            Welcome, candidate! Enter your name below
+            to verify your ICT Club membership status.
+        </p>
+
+        <form id="verification-form">
+
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input
+                    type="text"
+                    id="first-name"
+                    placeholder="Enter your first name"
+                    autocomplete="given-name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input
+                    type="text"
+                    id="last-name"
+                    placeholder="Enter your last name"
+                    autocomplete="family-name"
+                    required
+                >
+            </div>
+
+            <button
+                id="verify-btn"
+                type="button"
+                py-click="check_name"
+            >
+                Verify Membership
+            </button>
+
+        </form>
+
+        <div id="result" class="result" aria-live="polite">
+            Awaiting candidate information...
+        </div>
+
+        <p class="footer">
+            POWERED BY <span>ICT CLUB</span><br>
+            CANDIDATE PORTAL · SYSTEM V1.0
+        </p>
+
+    </main>
+
+    <script type="py" src="./main.py"></script>
+
+</body>
+</html>
+
